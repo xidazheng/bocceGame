@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAA5F39F1A0BCBF9006E0ADE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F39E1A0BCBF9006E0ADE /* main.m */; };
+		EAA5F3A21A0BCBF9006E0ADE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F3A11A0BCBF9006E0ADE /* AppDelegate.m */; };
+		EAA5F3A51A0BCBF9006E0ADE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F3A41A0BCBF9006E0ADE /* ViewController.m */; };
+		EAA5F3A81A0BCBF9006E0ADE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA5F3A61A0BCBF9006E0ADE /* Main.storyboard */; };
+		EAA5F3AA1A0BCBF9006E0ADE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA5F3A91A0BCBF9006E0ADE /* Images.xcassets */; };
+		EAA5F3AD1A0BCBF9006E0ADE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAA5F3AB1A0BCBF9006E0ADE /* LaunchScreen.xib */; };
+		EAA5F3B91A0BCBF9006E0ADE /* bocceGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F3B81A0BCBF9006E0ADE /* bocceGameTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAA5F3B31A0BCBF9006E0ADE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAA5F3911A0BCBF9006E0ADE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAA5F3981A0BCBF9006E0ADE;
+			remoteInfo = bocceGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EAA5F3991A0BCBF9006E0ADE /* bocceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bocceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAA5F39D1A0BCBF9006E0ADE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAA5F39E1A0BCBF9006E0ADE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EAA5F3A01A0BCBF9006E0ADE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EAA5F3A11A0BCBF9006E0ADE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EAA5F3A31A0BCBF9006E0ADE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EAA5F3A41A0BCBF9006E0ADE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EAA5F3A71A0BCBF9006E0ADE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EAA5F3A91A0BCBF9006E0ADE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EAA5F3AC1A0BCBF9006E0ADE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EAA5F3B21A0BCBF9006E0ADE /* bocceGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bocceGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAA5F3B71A0BCBF9006E0ADE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAA5F3B81A0BCBF9006E0ADE /* bocceGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bocceGameTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EAA5F3961A0BCBF9006E0ADE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAA5F3AF1A0BCBF9006E0ADE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EAA5F3901A0BCBF9006E0ADE = {
+			isa = PBXGroup;
+			children = (
+				EAA5F39B1A0BCBF9006E0ADE /* bocceGame */,
+				EAA5F3B51A0BCBF9006E0ADE /* bocceGameTests */,
+				EAA5F39A1A0BCBF9006E0ADE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EAA5F39A1A0BCBF9006E0ADE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAA5F3991A0BCBF9006E0ADE /* bocceGame.app */,
+				EAA5F3B21A0BCBF9006E0ADE /* bocceGameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAA5F39B1A0BCBF9006E0ADE /* bocceGame */ = {
+			isa = PBXGroup;
+			children = (
+				EAA5F3A01A0BCBF9006E0ADE /* AppDelegate.h */,
+				EAA5F3A11A0BCBF9006E0ADE /* AppDelegate.m */,
+				EAA5F3A31A0BCBF9006E0ADE /* ViewController.h */,
+				EAA5F3A41A0BCBF9006E0ADE /* ViewController.m */,
+				EAA5F3A61A0BCBF9006E0ADE /* Main.storyboard */,
+				EAA5F3A91A0BCBF9006E0ADE /* Images.xcassets */,
+				EAA5F3AB1A0BCBF9006E0ADE /* LaunchScreen.xib */,
+				EAA5F39C1A0BCBF9006E0ADE /* Supporting Files */,
+			);
+			path = bocceGame;
+			sourceTree = "<group>";
+		};
+		EAA5F39C1A0BCBF9006E0ADE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAA5F39D1A0BCBF9006E0ADE /* Info.plist */,
+				EAA5F39E1A0BCBF9006E0ADE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAA5F3B51A0BCBF9006E0ADE /* bocceGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				EAA5F3B81A0BCBF9006E0ADE /* bocceGameTests.m */,
+				EAA5F3B61A0BCBF9006E0ADE /* Supporting Files */,
+			);
+			path = bocceGameTests;
+			sourceTree = "<group>";
+		};
+		EAA5F3B61A0BCBF9006E0ADE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAA5F3B71A0BCBF9006E0ADE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EAA5F3981A0BCBF9006E0ADE /* bocceGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAA5F3BC1A0BCBF9006E0ADE /* Build configuration list for PBXNativeTarget "bocceGame" */;
+			buildPhases = (
+				EAA5F3951A0BCBF9006E0ADE /* Sources */,
+				EAA5F3961A0BCBF9006E0ADE /* Frameworks */,
+				EAA5F3971A0BCBF9006E0ADE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bocceGame;
+			productName = bocceGame;
+			productReference = EAA5F3991A0BCBF9006E0ADE /* bocceGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EAA5F3B11A0BCBF9006E0ADE /* bocceGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAA5F3BF1A0BCBF9006E0ADE /* Build configuration list for PBXNativeTarget "bocceGameTests" */;
+			buildPhases = (
+				EAA5F3AE1A0BCBF9006E0ADE /* Sources */,
+				EAA5F3AF1A0BCBF9006E0ADE /* Frameworks */,
+				EAA5F3B01A0BCBF9006E0ADE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAA5F3B41A0BCBF9006E0ADE /* PBXTargetDependency */,
+			);
+			name = bocceGameTests;
+			productName = bocceGameTests;
+			productReference = EAA5F3B21A0BCBF9006E0ADE /* bocceGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EAA5F3911A0BCBF9006E0ADE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = xidazheng;
+				TargetAttributes = {
+					EAA5F3981A0BCBF9006E0ADE = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					EAA5F3B11A0BCBF9006E0ADE = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = EAA5F3981A0BCBF9006E0ADE;
+					};
+				};
+			};
+			buildConfigurationList = EAA5F3941A0BCBF9006E0ADE /* Build configuration list for PBXProject "bocceGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EAA5F3901A0BCBF9006E0ADE;
+			productRefGroup = EAA5F39A1A0BCBF9006E0ADE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EAA5F3981A0BCBF9006E0ADE /* bocceGame */,
+				EAA5F3B11A0BCBF9006E0ADE /* bocceGameTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EAA5F3971A0BCBF9006E0ADE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA5F3A81A0BCBF9006E0ADE /* Main.storyboard in Resources */,
+				EAA5F3AD1A0BCBF9006E0ADE /* LaunchScreen.xib in Resources */,
+				EAA5F3AA1A0BCBF9006E0ADE /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAA5F3B01A0BCBF9006E0ADE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAA5F3951A0BCBF9006E0ADE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA5F3A51A0BCBF9006E0ADE /* ViewController.m in Sources */,
+				EAA5F3A21A0BCBF9006E0ADE /* AppDelegate.m in Sources */,
+				EAA5F39F1A0BCBF9006E0ADE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAA5F3AE1A0BCBF9006E0ADE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA5F3B91A0BCBF9006E0ADE /* bocceGameTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAA5F3B41A0BCBF9006E0ADE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAA5F3981A0BCBF9006E0ADE /* bocceGame */;
+			targetProxy = EAA5F3B31A0BCBF9006E0ADE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EAA5F3A61A0BCBF9006E0ADE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAA5F3A71A0BCBF9006E0ADE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EAA5F3AB1A0BCBF9006E0ADE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EAA5F3AC1A0BCBF9006E0ADE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EAA5F3BA1A0BCBF9006E0ADE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EAA5F3BB1A0BCBF9006E0ADE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EAA5F3BD1A0BCBF9006E0ADE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = bocceGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EAA5F3BE1A0BCBF9006E0ADE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = bocceGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EAA5F3C01A0BCBF9006E0ADE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = bocceGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bocceGame.app/bocceGame";
+			};
+			name = Debug;
+		};
+		EAA5F3C11A0BCBF9006E0ADE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = bocceGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bocceGame.app/bocceGame";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EAA5F3941A0BCBF9006E0ADE /* Build configuration list for PBXProject "bocceGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAA5F3BA1A0BCBF9006E0ADE /* Debug */,
+				EAA5F3BB1A0BCBF9006E0ADE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAA5F3BC1A0BCBF9006E0ADE /* Build configuration list for PBXNativeTarget "bocceGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAA5F3BD1A0BCBF9006E0ADE /* Debug */,
+				EAA5F3BE1A0BCBF9006E0ADE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EAA5F3BF1A0BCBF9006E0ADE /* Build configuration list for PBXNativeTarget "bocceGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAA5F3C01A0BCBF9006E0ADE /* Debug */,
+				EAA5F3C11A0BCBF9006E0ADE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EAA5F3911A0BCBF9006E0ADE /* Project object */;
+}
