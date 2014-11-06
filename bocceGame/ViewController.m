@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIView *targetBlock;
 @property (nonatomic) NSInteger blocksMade;
 @property (nonatomic) BOOL justMadeBlock;
+@property (nonatomic) BOOL notSuccessfullyThrown;
 
 @end
 
@@ -37,6 +38,7 @@
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     self.animator.delegate = self;
     self.blocksMade = 0;
+    self.notSuccessfullyThrown = NO;
     
     //make a green start pad to show where you have to release the box
     CALayer *green = [[CALayer alloc] init];
@@ -129,7 +131,7 @@
                     NSLog(@"should reset");
                     
                     gesture.view.center = self.startingLocation;
-                    
+                    self.notSuccessfullyThrown = YES;
                 }else if ([gesture velocityInView:self.view].y < 0){
                     
                     CGPoint velocity = [gesture velocityInView:self.view];
@@ -140,7 +142,7 @@
                     [self.animator updateItemUsingCurrentState:gesture.view];
                     
                     [gesture.view setUserInteractionEnabled:NO];
-                    
+                    self.notSuccessfullyThrown = NO;
                 }
                 
                 break;
@@ -153,14 +155,15 @@
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
 {
-    if (self.justMadeBlock) {
+    if (self.justMadeBlock || self.notSuccessfullyThrown) {
         self.justMadeBlock = NO;
+        self.notSuccessfullyThrown = NO;
     }
     else if (self.blocksMade % 2 == 1)
     {
         if (self.currentBlock.backgroundColor == [UIColor blackColor]) {
             [self.collision removeItem:self.currentBlock];
-//            [self.collision setCollisionMode:UICollisionBehaviorModeItems];
+            [self.collision setCollisionMode:UICollisionBehaviorModeItems];
         }
         [self makeBlockWithColor:[UIColor redColor]];
     }else if (self.blocksMade % 2 == 0)
