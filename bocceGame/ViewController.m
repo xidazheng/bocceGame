@@ -6,6 +6,23 @@
 //  Copyright (c) 2014 xidazheng. All rights reserved.
 //
 
+// ONGOING WORK:
+// Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
+// Change the blocks to circles
+// Change the collisions to only collide with blocks
+// Check to make sure that the jack is in the right range
+// Show which team is going
+// Show how many balls each team has left (maximum of 4)
+// Stop when all four balls have been thrown on each side
+// Change the make block to make the color of the team that does not have the nearest ball to the jack
+// Score the game - get one point for each block closer to the jack than the nearest opponent block
+// Highlight the nearest ball
+// Update the score after each turn
+// Overlay a target on the jack
+// Make the blocks bigger and more massive
+// Add slight gravity during each game
+// Stop the game at 7 points
+
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -53,9 +70,12 @@
     [self.collision setCollisionMode:UICollisionBehaviorModeEverything];
     [self.animator addBehavior:self.collision];
     
+    //add initial boundary for jack (the target ball)
+    [self.collision addBoundaryWithIdentifier:@"end" fromPoint:CGPointMake(0, self.view.frame.size.height*0.1) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.1)];
+    
     //init linearVelocity
     self.linearVelocity = [[UIDynamicItemBehavior alloc] init];
-    self.linearVelocity.elasticity = 0.4;
+    self.linearVelocity.elasticity = 0.05;
     self.linearVelocity.resistance = 2;
     self.linearVelocity.angularResistance = 2;
     
@@ -162,8 +182,13 @@
     else if (self.blocksMade % 2 == 1)
     {
         if (self.currentBlock.backgroundColor == [UIColor blackColor]) {
+            //check that the ball is within the target range and reset if not
+            
+            
+            
             [self.collision removeItem:self.currentBlock];
             [self.collision setCollisionMode:UICollisionBehaviorModeItems];
+            [self.collision removeBoundaryWithIdentifier:@"end"];
         }
         [self makeBlockWithColor:[UIColor redColor]];
     }else if (self.blocksMade % 2 == 0)
