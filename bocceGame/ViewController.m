@@ -13,6 +13,11 @@
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic) CGPoint startingLocation;
 @property (strong, nonatomic) UIDynamicItemBehavior *linearVelocity;
+@property (strong, nonatomic) UICollisionBehavior *collision;
+@property (strong, nonatomic) UIView *currentBlock;
+@property (strong, nonatomic) UIView *targetBlock;
+@property (nonatomic) NSInteger blocksMade;
+@property (nonatomic) BOOL justMadeBlock;
 
 @end
 
@@ -30,41 +35,54 @@
     [super viewDidAppear:animated];
     
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.animator.delegate = self;
+    self.blocksMade = 0;
     
     //make a green start pad to show where you have to release the box
     CALayer *green = [[CALayer alloc] init];
     green.frame = CGRectMake(0, self.view.frame.size.height - 150, self.view.frame.size.width, 150);
     green.backgroundColor = [[UIColor greenColor] CGColor];
     green.zPosition = -1;
-    
     [self.view.layer addSublayer:green];
     
+    //init collision behavior
+    self.collision = [[UICollisionBehavior alloc] init];
+    [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
+    [self.collision setCollisionMode:UICollisionBehaviorModeEverything];
+    [self.animator addBehavior:self.collision];
     
-    //when a thing is dragged, it will have the linearVelocity at the end of the swipe with value average over the pan.
-    
-    UIPanGestureRecognizer *dragBlueView = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragged:)];
-    UIPanGestureRecognizer *dragRedView = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragged:)];
-    
-    [self.blueView addGestureRecognizer:dragBlueView];
-    [self.redView addGestureRecognizer:dragRedView];
-    
-    
-    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.redView,self.blueView]];
-    [collision setTranslatesReferenceBoundsIntoBoundary:YES];
-    [collision setCollisionMode:UICollisionBehaviorModeEverything];
-    
-    [self.animator addBehavior:collision];
-    
-    self.linearVelocity = [[UIDynamicItemBehavior alloc] initWithItems:@[self.blueView,self.redView]];
-    
-    
-    self.linearVelocity.elasticity = 1;
+    //init linearVelocity
+    self.linearVelocity = [[UIDynamicItemBehavior alloc] init];
+    self.linearVelocity.elasticity = 0.4;
     self.linearVelocity.resistance = 2;
     self.linearVelocity.angularResistance = 2;
     
-    [self.animator addBehavior:self.linearVelocity];
-    
+    //make block
+    [self makeBlockWithColor:[UIColor blackColor]];
 }
+
+- (void) makeBlockWithColor:(UIColor *)color
+{
+    //init block
+    self.currentBlock = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2- 15, self.view.frame.size.height - 60, 30, 30)];
+    self.currentBlock.backgroundColor = color;
+    [self.view addSubview:self.currentBlock];
+    
+    //place block
+    
+    
+    //add draggable behavior, only one object should have draggable behavior and it should be reassigned when a new block is created
+    UIPanGestureRecognizer *draggable = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragged:)];
+    
+    [self.currentBlock addGestureRecognizer:draggable];
+    [self.collision addItem:self.currentBlock];
+    [self.linearVelocity addItem:self.currentBlock];
+    
+    self.blocksMade++;
+    self.justMadeBlock = YES;
+}
+//get the delegate for the animation and when the animation is done make the next block
+
 
 - (void) dragged:(UIPanGestureRecognizer *)gesture
 {
@@ -76,6 +94,7 @@
                 NSLog(@"Began %f %f", self.startingLocation.x, self.startingLocation.y);
                 
                 
+
                 break;
                 
             case UIGestureRecognizerStateChanged:
@@ -91,8 +110,6 @@
                 if (newY < self.view.frame.size.height - 150) {
                     NSLog(@"should reset");
                 }
-                
-                
                 
                 break;
             }
@@ -122,26 +139,36 @@
                     [self.animator addBehavior:self.linearVelocity];
                     [self.animator updateItemUsingCurrentState:gesture.view];
                     
-                    
                     [gesture.view setUserInteractionEnabled:NO];
+                    
                 }
                 
                 break;
             }
-                
-                
             default:
                 break;
         }
-        
+    }
+}
+
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator
+{
+    if (self.justMadeBlock) {
+        self.justMadeBlock = NO;
+    }
+    else if (self.blocksMade % 2 == 1)
+    {
+        if (self.currentBlock.backgroundColor == [UIColor blackColor]) {
+            [self.collision removeItem:self.currentBlock];
+//            [self.collision setCollisionMode:UICollisionBehaviorModeItems];
+        }
+        [self makeBlockWithColor:[UIColor redColor]];
+    }else if (self.blocksMade % 2 == 0)
+    {
+        [self makeBlockWithColor:[UIColor blueColor]];
     }
     
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
