@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA89D94D1A0D576A00597D76 /* Project To Do in Resources */ = {isa = PBXBuildFile; fileRef = EA89D94C1A0D576A00597D76 /* Project To Do */; };
 		EAA5F39F1A0BCBF9006E0ADE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F39E1A0BCBF9006E0ADE /* main.m */; };
 		EAA5F3A21A0BCBF9006E0ADE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F3A11A0BCBF9006E0ADE /* AppDelegate.m */; };
 		EAA5F3A51A0BCBF9006E0ADE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA5F3A41A0BCBF9006E0ADE /* ViewController.m */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA89D94C1A0D576A00597D76 /* Project To Do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Project To Do"; sourceTree = "<group>"; };
 		EAA5F3991A0BCBF9006E0ADE /* bocceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bocceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA5F39D1A0BCBF9006E0ADE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAA5F39E1A0BCBF9006E0ADE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				EAA5F3A11A0BCBF9006E0ADE /* AppDelegate.m */,
 				EAA5F3A31A0BCBF9006E0ADE /* ViewController.h */,
 				EAA5F3A41A0BCBF9006E0ADE /* ViewController.m */,
+				EA89D94C1A0D576A00597D76 /* Project To Do */,
 				EAA5F3A61A0BCBF9006E0ADE /* Main.storyboard */,
 				EAA5F3A91A0BCBF9006E0ADE /* Images.xcassets */,
 				EAA5F3AB1A0BCBF9006E0ADE /* LaunchScreen.xib */,
@@ -201,6 +204,7 @@
 			files = (
 				EAA5F3A81A0BCBF9006E0ADE /* Main.storyboard in Resources */,
 				EAA5F3AD1A0BCBF9006E0ADE /* LaunchScreen.xib in Resources */,
+				EA89D94D1A0D576A00597D76 /* Project To Do in Resources */,
 				EAA5F3AA1A0BCBF9006E0ADE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

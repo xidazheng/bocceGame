@@ -6,36 +6,6 @@
 //  Copyright (c) 2014 xidazheng. All rights reserved.
 //
 
-// ONGOING WORK:
-// DONE - Xida - Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
-// DONE - Xida - Change the collisions to only collide with blocks
-
-// Game Logic
-// Highlight the nearest ball
-// Change the make block to make the color of the team that does not have the nearest ball to the jack
-// Show which team is going
-// Show how many balls each team has left (maximum of 4)
-// Stop when all four balls have been thrown on each side
-
-// Scoring Logic
-// A match is consisted of enough games for one side to reach 7 points
-// Update the game score after each turn
-// Score the game - get one point for each block closer to the jack than the nearest opponent block
-// Stop the match at 7 points
-
-// Jack Improvements - Nice to Have
-// Check to make sure that the jack is in the right range
-// Overlay a target on the jack
-
-// Design Polish
-// Change the blocks to circles
-// Make the blocks bigger and more massive
-
-// Game Behavior Tweaking - Nice to have
-// Add slight gravity during each game
-
-// Refactor into classes
-
 #import "ViewController.h"
 
 @interface ViewController ()
