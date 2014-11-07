@@ -7,21 +7,34 @@
 //
 
 // ONGOING WORK:
-// Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
-// Change the blocks to circles
-// Change the collisions to only collide with blocks
-// Check to make sure that the jack is in the right range
+// DONE - Xida - Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
+// DONE - Xida - Change the collisions to only collide with blocks
+
+// Game Logic
+// Highlight the nearest ball
+// Change the make block to make the color of the team that does not have the nearest ball to the jack
 // Show which team is going
 // Show how many balls each team has left (maximum of 4)
 // Stop when all four balls have been thrown on each side
-// Change the make block to make the color of the team that does not have the nearest ball to the jack
+
+// Scoring Logic
+// A match is consisted of enough games for one side to reach 7 points
+// Update the game score after each turn
 // Score the game - get one point for each block closer to the jack than the nearest opponent block
-// Highlight the nearest ball
-// Update the score after each turn
+// Stop the match at 7 points
+
+// Jack Improvements - Nice to Have
+// Check to make sure that the jack is in the right range
 // Overlay a target on the jack
+
+// Design Polish
+// Change the blocks to circles
 // Make the blocks bigger and more massive
+
+// Game Behavior Tweaking - Nice to have
 // Add slight gravity during each game
-// Stop the game at 7 points
+
+// Refactor into classes
 
 #import "ViewController.h"
 
@@ -66,18 +79,26 @@
     
     //init collision behavior
     self.collision = [[UICollisionBehavior alloc] init];
+    self.collision.collisionDelegate = self;
     [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
     [self.collision setCollisionMode:UICollisionBehaviorModeEverything];
-    [self.animator addBehavior:self.collision];
     
     //add initial boundary for jack (the target ball)
     [self.collision addBoundaryWithIdentifier:@"end" fromPoint:CGPointMake(0, self.view.frame.size.height*0.1) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.1)];
     
+    //add boundaries around the outside of the visible window
+//    [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
+    
+    [self.animator addBehavior:self.collision];
+    
+    
+    
+    
     //init linearVelocity
     self.linearVelocity = [[UIDynamicItemBehavior alloc] init];
     self.linearVelocity.elasticity = 0.05;
-    self.linearVelocity.resistance = 2;
-    self.linearVelocity.angularResistance = 2;
+    self.linearVelocity.resistance = 3;
+    self.linearVelocity.angularResistance = 3;
     
     //make block
     [self makeBlockWithColor:[UIColor blackColor]];
@@ -163,6 +184,7 @@
                     
                     [gesture.view setUserInteractionEnabled:NO];
                     self.notSuccessfullyThrown = NO;
+                    
                 }
                 
                 break;
@@ -187,16 +209,33 @@
             
             
             [self.collision removeItem:self.currentBlock];
-            [self.collision setCollisionMode:UICollisionBehaviorModeItems];
             [self.collision removeBoundaryWithIdentifier:@"end"];
+            [self.collision setTranslatesReferenceBoundsIntoBoundary:NO];
+//            [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
+            [self.collision addBoundaryWithIdentifier:@"outOfBounds" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(-50, -50, self.view.frame.size.width+100, self.view.frame.size.height+100)]];
         }
         [self makeBlockWithColor:[UIColor redColor]];
     }else if (self.blocksMade % 2 == 0)
     {
         [self makeBlockWithColor:[UIColor blueColor]];
     }
-    
 }
 
+- (void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p
+{
+    if ([((NSString *)identifier) isEqualToString:@"outOfBounds"]) {
+        //stop the motion
+//        CGPoint linearVelocity = [self.linearVelocity linearVelocityForItem:item];
+//        CGPoint inverseLinearVelocity = CGPointMake(-linearVelocity.x, -linearVelocity.y);
+//        [self.linearVelocity addLinearVelocity:inverseLinearVelocity forItem:item];
+        
+        //not allow it to move
+        [self.linearVelocity removeItem:item];
+        //not allow it to interact with future blocks
+        [self.collision removeItem:item];
+        
+        
+    }
+}
 
 @end

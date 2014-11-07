@@ -412,6 +412,7 @@
 				EAA5F3BE1A0BCBF9006E0ADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAA5F3BF1A0BCBF9006E0ADE /* Build configuration list for PBXNativeTarget "bocceGameTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +421,7 @@
 				EAA5F3C11A0BCBF9006E0ADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
