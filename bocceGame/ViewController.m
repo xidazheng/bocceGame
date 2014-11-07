@@ -55,9 +55,7 @@
     
     //add initial boundary for jack (the target ball)
     [self.collision addBoundaryWithIdentifier:@"end" fromPoint:CGPointMake(0, self.view.frame.size.height*0.1) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.1)];
-    
-    //add boundaries around the outside of the visible window
-//    [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
+
     
     [self.animator addBehavior:self.collision];
     
@@ -67,8 +65,8 @@
     //init linearVelocity
     self.linearVelocity = [[UIDynamicItemBehavior alloc] init];
     self.linearVelocity.elasticity = 0.05;
-    self.linearVelocity.resistance = 3;
-    self.linearVelocity.angularResistance = 3;
+    self.linearVelocity.resistance = 4;
+    self.linearVelocity.angularResistance = 4;
     
     //make block
     [self makeBlockWithColor:[UIColor blackColor]];
@@ -77,7 +75,7 @@
 - (void) makeBlockWithColor:(UIColor *)color
 {
     //init block
-    self.currentBlock = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2- 15, self.view.frame.size.height - 60, 30, 30)];
+    self.currentBlock = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2- 22.5, self.view.frame.size.height - 60, 45, 45)];
     self.currentBlock.backgroundColor = color;
     [self.view addSubview:self.currentBlock];
     
@@ -182,7 +180,7 @@
             [self.collision removeBoundaryWithIdentifier:@"end"];
             [self.collision setTranslatesReferenceBoundsIntoBoundary:NO];
 //            [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
-            [self.collision addBoundaryWithIdentifier:@"outOfBounds" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(-50, -50, self.view.frame.size.width+100, self.view.frame.size.height+100)]];
+            [self.collision addBoundaryWithIdentifier:@"outOfBounds" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(-90, -90, self.view.frame.size.width+180, self.view.frame.size.height+180)]];
         }
         [self makeBlockWithColor:[UIColor redColor]];
     }else if (self.blocksMade % 2 == 0)
