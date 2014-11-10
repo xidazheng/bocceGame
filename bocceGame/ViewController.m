@@ -175,16 +175,26 @@
             //check that the ball is within the target range and reset if not
             
             
-            
+            self.targetBlock = self.currentBlock;
             [self.collision removeItem:self.currentBlock];
             [self.collision removeBoundaryWithIdentifier:@"end"];
             [self.collision setTranslatesReferenceBoundsIntoBoundary:NO];
 //            [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
             [self.collision addBoundaryWithIdentifier:@"outOfBounds" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(-90, -90, self.view.frame.size.width+180, self.view.frame.size.height+180)]];
         }
+        
+        [self unmarkAllBlocks];
+        NSArray *blocks = [self checkClosestBlocksToTargetBlock];
+        [self markWinningBlocksWithBlocks:blocks];
+        
         [self makeBlockWithColor:[UIColor redColor]];
     }else if (self.blocksMade % 2 == 0)
     {
+        
+        [self unmarkAllBlocks];
+        NSArray *blocks = [self checkClosestBlocksToTargetBlock];
+        [self markWinningBlocksWithBlocks:blocks];
+        
         [self makeBlockWithColor:[UIColor blueColor]];
     }
 }
@@ -202,8 +212,121 @@
         //not allow it to interact with future blocks
         [self.collision removeItem:item];
         
-        
     }
 }
+
+- (void) unmarkAllBlocks
+{
+    NSArray *blocksOnScreen = [self.collision items];
+
+    for (UIView *block in blocksOnScreen) {
+        if(block.layer.sublayers)
+        {
+            [(CALayer *)block.layer.sublayers[0] removeFromSuperlayer];
+        }
+        NSLog(@"Block layer %@ sublayers %@", block, block.layer.sublayers);
+    }
+}
+
+- (NSArray *)checkClosestBlocksToTargetBlock
+{
+    
+    //get the other blocks that have not gone off the screen
+    //they should be able to be collided with
+    NSArray *blocksOnScreen = [self.collision items];
+    
+    //get their locations
+    
+    NSMutableArray *otherBlockLocations = [[NSMutableArray alloc] init];
+    for (UIView *block in blocksOnScreen) {
+        //compare their locations to the location of the target block
+        NSNumber *distanceToTarget = [self findDistanceToTargetWithBlock:block];
+        UIColor *team = block.backgroundColor;
+        NSDictionary *blockTeamAndDistance = [[NSDictionary alloc] initWithObjectsAndKeys:team, @"team", distanceToTarget, @"distanceToTarget", block, @"view", nil];
+        
+        [otherBlockLocations addObject:blockTeamAndDistance];
+    }
+    
+    //find the closest block(s) by sorting array
+    [otherBlockLocations sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDictionary *block1 = obj1;
+        NSDictionary *block2 = obj2;
+        
+        if ([(NSNumber *)block1[@"distanceToTarget"] floatValue] < [(NSNumber *)block2[@"distanceToTarget"] floatValue])
+        {
+            return NSOrderedAscending;
+        }else if ([(NSNumber *)block1[@"distanceToTarget"] floatValue] > [(NSNumber *)block2[@"distanceToTarget"] floatValue])
+        {
+            return NSOrderedDescending;
+        }else
+        {
+            return NSOrderedSame;
+        }
+    }];
+    
+    //iterate over the array to find the index when the team is different
+//    NSLog(@"%@", otherBlockLocations);
+    
+    
+    NSMutableArray *winningBlocks = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < [otherBlockLocations count]; i++) {
+        NSDictionary *currentBlock = otherBlockLocations[i];
+        UIView *currentView = currentBlock[@"view"];
+        
+        
+        if (i == 0) {
+            [winningBlocks addObject:currentBlock];
+        } else if (currentView.backgroundColor == ((UIView *)((NSDictionary *)winningBlocks[0])[@"view"]).backgroundColor ) {
+            [winningBlocks addObject:currentBlock];
+        } else {
+            //stop looking
+            i = [otherBlockLocations count];
+        }
+    }
+    
+    NSLog(@"winning blocks %@", winningBlocks);
+    
+    return winningBlocks;
+}
+
+- (void)markWinningBlocksWithBlocks:(NSArray *)blocks
+{
+    if ([blocks count] > 0) {
+        
+        NSDictionary *winningBlock = blocks[0];
+        CGRect superViewBounds = ((UIView *)winningBlock[@"view"]).bounds;
+        
+        for (NSDictionary *block in blocks) {
+            //add a CALayer inside the winning blocks that is yellow.
+            CALayer *yellowSquare = [[CALayer alloc]init];
+            yellowSquare.backgroundColor = [UIColor yellowColor].CGColor;
+            yellowSquare.bounds = CGRectMake(0, 0, superViewBounds.size.width/2, superViewBounds.size.height/2);
+            yellowSquare.position = CGPointMake(superViewBounds.size.width/2, superViewBounds.size.height/2);
+            
+            UIView *view = block[@"view"];
+            [view.layer addSublayer:yellowSquare];
+        }
+    }
+    
+}
+
+- (NSNumber *)findDistanceToTargetWithBlock:(UIView *)block
+{
+    //find location of the target block
+    CGPoint targetLocation = self.targetBlock.center;
+    
+    CGPoint blockLocation = block.center;
+    
+    CGFloat distance = sqrtf(powf((targetLocation.x - blockLocation.x), 2) + powf((targetLocation.y - blockLocation.y), 2));
+    
+    return [NSNumber numberWithFloat:distance];
+}
+
+
+
+
+
+
+
 
 @end

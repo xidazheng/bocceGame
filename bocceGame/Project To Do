@@ -20,7 +20,7 @@ Team Git Workflow:
 // 2. DONE - Xida - Change blocks to not collide with jack
 
 // 3. Xida - Game Logic
-// Highlight the nearest ball
+// DONE - Highlight the nearest ball
 // Change the make block to make the color of the team that does not have the nearest ball to the jack
 // Show which team is going
 // Show how many balls each team has left (maximum of 4)
