@@ -19,12 +19,13 @@ Team Git Workflow:
 // 1. DONE - Xida - Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
 // 2. DONE - Xida - Change blocks to not collide with jack
 
-// 3. Xida - Game Logic
+// 3. DONE - Xida - Game Logic
 // DONE - Highlight the nearest ball
-// Change the make block to make the color of the team that does not have the nearest ball to the jack
-// Show which team is going
-// Show how many balls each team has left (maximum of 4)
-// Stop when all four balls have been thrown on each side
+// DONE - Change the make block to make the color of the team that does not have the nearest ball to the jack
+// DONE - Show which team is going
+// DONE - Cap the number of balls to 4 per player
+// DONE - Show how many balls each team has left (maximum of 4)
+// DONE - Stop when all four balls have been thrown on each side
 
 // 4. Scoring Logic
 // A match is consisted of enough games for one side to reach 7 points
@@ -38,7 +39,7 @@ Team Git Workflow:
 
 // 5. Design Polish
 // Change the blocks to circles
-// Make the blocks bigger and more massive
+// DONE - Make the blocks bigger and more massive
 
 // 6. Game Behavior Tweaking - Nice to have
 // Add slight gravity during each game

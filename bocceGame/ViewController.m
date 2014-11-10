@@ -17,8 +17,22 @@
 @property (strong, nonatomic) UIView *currentBlock;
 @property (strong, nonatomic) UIView *targetBlock;
 @property (nonatomic) NSInteger blocksMade;
+@property (nonatomic) NSInteger redBlocks;
+@property (nonatomic) NSInteger blueBlocks;
 @property (nonatomic) BOOL justMadeBlock;
 @property (nonatomic) BOOL notSuccessfullyThrown;
+@property (strong, nonatomic) UILabel *turnIndicator;
+
+@property (nonatomic, strong) CAShapeLayer *redBall1;
+@property (nonatomic, strong) CAShapeLayer *redBall2;
+@property (nonatomic, strong) CAShapeLayer *redBall3;
+@property (nonatomic, strong) CAShapeLayer *redBall4;
+@property (nonatomic, strong) CAShapeLayer *blueBall1;
+@property (nonatomic, strong) CAShapeLayer *blueBall2;
+@property (nonatomic, strong) CAShapeLayer *blueBall3;
+@property (nonatomic, strong) CAShapeLayer *blueBall4;
+
+
 
 @end
 
@@ -27,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+
     
 }
 
@@ -38,16 +52,29 @@
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     self.animator.delegate = self;
     self.blocksMade = 0;
+    self.redBlocks = 0;
+    self.blueBlocks = 0;
+    self.justMadeBlock = NO;
     self.notSuccessfullyThrown = NO;
     
     //make a green start pad to show where you have to release the box
     CALayer *green = [[CALayer alloc] init];
-    green.frame = CGRectMake(0, self.view.frame.size.height - 150, self.view.frame.size.width, 150);
+    green.frame = CGRectMake(0, self.view.frame.size.height - 175, self.view.frame.size.width, 175);
     green.backgroundColor = [[UIColor greenColor] CGColor];
     green.zPosition = -1;
     [self.view.layer addSublayer:green];
     
-    //init collision behavior
+    //initialize turn indicator
+    self.turnIndicator = [[UILabel alloc] init];
+    self.turnIndicator.frame = CGRectMake(self.view.frame.size.width/2 - 150, self.view.frame.size.height/2 - 25, 300, 50);
+    self.turnIndicator.textAlignment = NSTextAlignmentCenter;
+    [self.turnIndicator setAlpha:0.0];
+    [self.view addSubview:self.turnIndicator];
+    
+    [self initializeTheBlockCounters];
+    
+    
+    //initialize collision behavior
     self.collision = [[UICollisionBehavior alloc] init];
     self.collision.collisionDelegate = self;
     [self.collision setTranslatesReferenceBoundsIntoBoundary:YES];
@@ -55,14 +82,10 @@
     
     //add initial boundary for jack (the target ball)
     [self.collision addBoundaryWithIdentifier:@"end" fromPoint:CGPointMake(0, self.view.frame.size.height*0.1) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.1)];
-
     
     [self.animator addBehavior:self.collision];
     
-    
-    
-    
-    //init linearVelocity
+    //initialize linearVelocity
     self.linearVelocity = [[UIDynamicItemBehavior alloc] init];
     self.linearVelocity.elasticity = 0.05;
     self.linearVelocity.resistance = 4;
@@ -72,15 +95,91 @@
     [self makeBlockWithColor:[UIColor blackColor]];
 }
 
+- (void) initializeTheBlockCounters
+{
+    CGFloat windowWidth = self.view.frame.size.width;
+    CGFloat windowHeight = self.view.frame.size.height;
+    
+    //initialize the 4 balls on each side
+    self.redBall1 = [[CAShapeLayer alloc] init];
+    self.redBall1.frame = CGRectMake(windowWidth * 0.1, windowHeight * 0.8, windowWidth * 0.025, windowWidth * 0.025);
+    self.redBall1.path = CGPathCreateWithEllipseInRect(self.redBall1.bounds, NULL);
+    self.redBall1.fillColor =[UIColor redColor].CGColor;
+    self.redBall1.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.redBall2 = [[CAShapeLayer alloc] init];
+    self.redBall2.frame = CGRectMake(windowWidth * 0.1, windowHeight * 0.825, windowWidth * 0.025, windowWidth * 0.025);
+    self.redBall2.path = CGPathCreateWithEllipseInRect(self.redBall2.bounds, NULL);
+    self.redBall2.fillColor =[UIColor redColor].CGColor;
+    self.redBall2.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.redBall3 = [[CAShapeLayer alloc] init];
+    self.redBall3.frame = CGRectMake(windowWidth * 0.1, windowHeight * 0.85, windowWidth * 0.025, windowWidth * 0.025);
+    self.redBall3.path = CGPathCreateWithEllipseInRect(self.redBall3.bounds, NULL);
+    self.redBall3.fillColor =[UIColor redColor].CGColor;
+    self.redBall3.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.redBall4 = [[CAShapeLayer alloc] init];
+    self.redBall4.frame = CGRectMake(windowWidth * 0.1, windowHeight * 0.875, windowWidth * 0.025, windowWidth * 0.025);
+    self.redBall4.path = CGPathCreateWithEllipseInRect(self.redBall4.bounds, NULL);
+    self.redBall4.fillColor =[UIColor redColor].CGColor;
+    self.redBall4.lineWidth = 1;
+    
+    [self.view.layer addSublayer:self.redBall1];
+    [self.view.layer addSublayer:self.redBall2];
+    [self.view.layer addSublayer:self.redBall3];
+    [self.view.layer addSublayer:self.redBall4];
+    
+    //initialize the 4 balls on each side
+    self.blueBall1 = [[CAShapeLayer alloc] init];
+    self.blueBall1.frame = CGRectMake(windowWidth * 0.875, windowHeight * 0.8, windowWidth * 0.025, windowWidth * 0.025);
+    self.blueBall1.path = CGPathCreateWithEllipseInRect(self.blueBall1.bounds, NULL);
+    self.blueBall1.fillColor =[UIColor blueColor].CGColor;
+    self.blueBall1.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.blueBall2 = [[CAShapeLayer alloc] init];
+    self.blueBall2.frame = CGRectMake(windowWidth * 0.875, windowHeight * 0.825, windowWidth * 0.025, windowWidth * 0.025);
+    self.blueBall2.path = CGPathCreateWithEllipseInRect(self.blueBall2.bounds, NULL);
+    self.blueBall2.fillColor =[UIColor blueColor].CGColor;
+    self.blueBall2.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.blueBall3 = [[CAShapeLayer alloc] init];
+    self.blueBall3.frame = CGRectMake(windowWidth * 0.875, windowHeight * 0.85, windowWidth * 0.025, windowWidth * 0.025);
+    self.blueBall3.path = CGPathCreateWithEllipseInRect(self.blueBall3.bounds, NULL);
+    self.blueBall3.fillColor =[UIColor blueColor].CGColor;
+    self.blueBall3.lineWidth = 1;
+    
+    //initialize the 4 balls on each side
+    self.blueBall4 = [[CAShapeLayer alloc] init];
+    self.blueBall4.frame = CGRectMake(windowWidth * 0.875, windowHeight * 0.875, windowWidth * 0.025, windowWidth * 0.025);
+    self.blueBall4.path = CGPathCreateWithEllipseInRect(self.blueBall4.bounds, NULL);
+    self.blueBall4.fillColor =[UIColor blueColor].CGColor;
+    self.blueBall4.lineWidth = 1;
+    
+    [self.view.layer addSublayer:self.blueBall1];
+    [self.view.layer addSublayer:self.blueBall2];
+    [self.view.layer addSublayer:self.blueBall3];
+    [self.view.layer addSublayer:self.blueBall4];
+
+}
+
+
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"%@", self.redBall1);
+}
+
 - (void) makeBlockWithColor:(UIColor *)color
 {
     //init block
-    self.currentBlock = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2- 22.5, self.view.frame.size.height - 60, 45, 45)];
+    self.currentBlock = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2- 22.5, self.view.frame.size.height - 85, 45, 45)];
     self.currentBlock.backgroundColor = color;
     [self.view addSubview:self.currentBlock];
-    
-    //place block
-    
     
     //add draggable behavior, only one object should have draggable behavior and it should be reassigned when a new block is created
     UIPanGestureRecognizer *draggable = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragged:)];
@@ -89,10 +188,66 @@
     [self.collision addItem:self.currentBlock];
     [self.linearVelocity addItem:self.currentBlock];
     
+    
+    if (color == [UIColor redColor]) {
+        self.redBlocks++;
+    }else if (color == [UIColor blueColor]) {
+        self.blueBlocks++;
+    }
+    
+    //hide block indictors
+    [self updateBlockIndicators];
+    
     self.blocksMade++;
     self.justMadeBlock = YES;
 }
 //get the delegate for the animation and when the animation is done make the next block
+
+- (void) updateBlockIndicators
+{
+    switch (self.redBlocks) {
+        case 1:
+            [self.redBall1 setHidden:YES];
+            break;
+            
+        case 2:
+            [self.redBall2 setHidden:YES];
+            break;
+            
+        case 3:
+            [self.redBall3 setHidden:YES];
+            break;
+            
+        case 4:
+            [self.redBall4 setHidden:YES];
+            break;
+            
+        default:
+            break;
+    }
+    
+    switch (self.blueBlocks) {
+        case 1:
+            [self.blueBall1 setHidden:YES];
+            break;
+            
+        case 2:
+            [self.blueBall2 setHidden:YES];
+            break;
+            
+        case 3:
+            [self.blueBall3 setHidden:YES];
+            break;
+            
+        case 4:
+            [self.blueBall4 setHidden:YES];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 
 
 - (void) dragged:(UIPanGestureRecognizer *)gesture
@@ -118,7 +273,7 @@
                 
                 gesture.view.center = CGPointMake(newX, newY);
                 
-                if (newY < self.view.frame.size.height - 150) {
+                if (newY < self.view.frame.size.height - 175) {
                     NSLog(@"should reset");
                 }
                 
@@ -136,7 +291,7 @@
                 NSLog(@"Ended %f %f", endX, endY);
                 
                 
-                if (endY < self.view.frame.size.height - 150) {
+                if (endY < self.view.frame.size.height - 175) {
                     NSLog(@"should reset");
                     
                     gesture.view.center = self.startingLocation;
@@ -169,44 +324,68 @@
         self.justMadeBlock = NO;
         self.notSuccessfullyThrown = NO;
     }
-    else if (self.blocksMade % 2 == 1)
+    //all blocks have been thrown
+    else if (self.blocksMade == 9)
+    {
+        //end the game
+        //check the winner
+        UIColor *winningColor = [self updateBlockMarking];
+        if (winningColor == [UIColor blueColor]) {
+            self.turnIndicator.text = @"Winner: Team Blue";
+        }else {
+            self.turnIndicator.text = @"Winner: Team Red";
+        }
+    }
+    //middle of gameplay
+    else
     {
         if (self.currentBlock.backgroundColor == [UIColor blackColor]) {
             //check that the ball is within the target range and reset if not
-            
-            
             self.targetBlock = self.currentBlock;
             [self.collision removeItem:self.currentBlock];
             [self.collision removeBoundaryWithIdentifier:@"end"];
             [self.collision setTranslatesReferenceBoundsIntoBoundary:NO];
-//            [self.collision addBoundaryWithIdentifier:@"box" fromPoint:CGPointMake(0, self.view.frame.size.height*0.05) toPoint:CGPointMake(self.view.frame.size.width, self.view.frame.size.height*0.05)];
             [self.collision addBoundaryWithIdentifier:@"outOfBounds" forPath:[UIBezierPath bezierPathWithRect:CGRectMake(-90, -90, self.view.frame.size.width+180, self.view.frame.size.height+180)]];
         }
         
-        [self unmarkAllBlocks];
-        NSArray *blocks = [self checkClosestBlocksToTargetBlock];
-        [self markWinningBlocksWithBlocks:blocks];
-        
-        [self makeBlockWithColor:[UIColor redColor]];
-    }else if (self.blocksMade % 2 == 0)
-    {
-        
-        [self unmarkAllBlocks];
-        NSArray *blocks = [self checkClosestBlocksToTargetBlock];
-        [self markWinningBlocksWithBlocks:blocks];
-        
-        [self makeBlockWithColor:[UIColor blueColor]];
+        [self makeNextBlock];
     }
+}
+
+- (void) makeNextBlock
+{
+    UIColor *winningColor = [self updateBlockMarking];
+    if ((winningColor != [UIColor redColor] && self.redBlocks < 4) || (winningColor == [UIColor redColor] && self.blueBlocks >= 4)) {
+        UIColor *nextColor = [UIColor redColor];
+        [self makeBlockWithColor:nextColor];
+        self.turnIndicator.text = @"Up next: Team Red";
+        
+    }else {
+        UIColor *nextColor = [UIColor blueColor];
+        [self makeBlockWithColor:nextColor];
+        self.turnIndicator.text = @"Up next: Team Blue";
+        [UIView animateKeyframesWithDuration:1.5 delay:0 options:UIViewKeyframeAnimationOptionAutoreverse| UIViewKeyframeAnimationOptionRepeat animations:^{
+            [self.turnIndicator setAlpha:1.0];
+        } completion:nil];
+    }
+}
+
+- (UIColor *)updateBlockMarking
+{
+    [self unmarkAllBlocks];
+    NSArray *blocks = [self checkClosestBlocksToTargetBlock];
+    [self markWinningBlocksWithBlocks:blocks];
+    
+    if ([blocks count] > 0) {
+        NSDictionary *winningBlock = blocks[0];
+        return (UIColor *)winningBlock[@"team"];
+    }
+    return [UIColor redColor];
 }
 
 - (void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier atPoint:(CGPoint)p
 {
     if ([((NSString *)identifier) isEqualToString:@"outOfBounds"]) {
-        //stop the motion
-//        CGPoint linearVelocity = [self.linearVelocity linearVelocityForItem:item];
-//        CGPoint inverseLinearVelocity = CGPointMake(-linearVelocity.x, -linearVelocity.y);
-//        [self.linearVelocity addLinearVelocity:inverseLinearVelocity forItem:item];
-        
         //not allow it to move
         [self.linearVelocity removeItem:item];
         //not allow it to interact with future blocks
