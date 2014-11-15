@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UIDynamicAnimatorDelegate>
+@interface ViewController : UIViewController <UIDynamicAnimatorDelegate, UICollisionBehaviorDelegate>
 
 
 @end

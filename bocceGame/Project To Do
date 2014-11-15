@@ -1,0 +1,47 @@
+
+Team Git Workflow:
+
+1. At the start of the day, bring in the changes from Github.
+
+2. Please check the other person's branch on Github to make sure that we're not working on the same thing.
+
+3. Mark the section that you're currently working on. Push to your branch on Github.
+
+4. Mark the section done when you're done. Push the changes to your branch on Github.
+
+5. Do 2, 3, and 4 again.
+
+6. At the end of the day, add the changes to master branch on Github.
+
+
+
+// ONGOING WORK:
+// 1. DONE - Xida - Stop the moving block when it goes off screen, so that the next block doesn't have to wait for it to stop
+// 2. DONE - Xida - Change blocks to not collide with jack
+
+// 3. DONE - Xida - Game Logic
+// DONE - Highlight the nearest ball
+// DONE - Change the make block to make the color of the team that does not have the nearest ball to the jack
+// DONE - Show which team is going
+// DONE - Cap the number of balls to 4 per player
+// DONE - Show how many balls each team has left (maximum of 4)
+// DONE - Stop when all four balls have been thrown on each side
+
+// 4. Scoring Logic
+// A match is consisted of enough games for one side to reach 7 points
+// Update the game score after each turn
+// Score the game - get one point for each block closer to the jack than the nearest opponent block
+// Stop the match at 7 points
+
+// 4. Jack Improvements - Nice to Have
+// Check to make sure that the jack is in the right range
+// Overlay a target on the jack
+
+// 5. Design Polish
+// Change the blocks to circles
+// DONE - Make the blocks bigger and more massive
+
+// 6. Game Behavior Tweaking - Nice to have
+// Add slight gravity during each game
+
+// 7. Refactor into classes
