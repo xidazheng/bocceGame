@@ -65,7 +65,7 @@
     //make a green start pad to show where you have to release the box
     CALayer *green = [[CALayer alloc] init];
     green.frame = CGRectMake(0, self.view.frame.size.height - 200, self.view.frame.size.width, 200);
-    green.backgroundColor = self.green.CGColor;
+    green.backgroundColor = self.yellow.CGColor;
     green.zPosition = -1;
     [self.view.layer addSublayer:green];
     
@@ -76,6 +76,10 @@
     self.turnIndicator.layer.zPosition = 1;
     [self.turnIndicator setAlpha:0.0];
     [self.view addSubview:self.turnIndicator];
+    self.turnIndicator.text = @"Flick the Target Ball Up";
+    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionAutoreverse| UIViewAnimationOptionRepeat | UIViewAnimationOptionAllowUserInteraction  animations:^{
+        [self.turnIndicator setAlpha:1.0];
+    } completion:nil];
     
     [self initializeTheBlockCounters];
     
@@ -328,6 +332,11 @@
         self.notSuccessfullyThrown = NO;
     }
     //all blocks have been thrown
+    else if (self.currentBlock.center.y > self.view.frame.size.height - 250)
+    {
+        self.currentBlock.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 85);
+        
+    }
     else if (self.blocksMade == 9)
     {
         //end the game
@@ -377,11 +386,6 @@
     }
     //middle of gameplay
     //didn't go far enough
-    else if (self.currentBlock.center.y > self.view.frame.size.height - 250)
-    {
-        self.currentBlock.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 85);
-        
-    }
     
     else
     {
@@ -410,10 +414,6 @@
         UIColor *nextColor = self.blue;
         [self makeBlockWithColor:nextColor];
         self.turnIndicator.text = @"Up next: Team Blue";
-        [self.turnIndicator setHidden:NO];
-        [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionAutoreverse| UIViewAnimationOptionRepeat | UIViewAnimationOptionAllowUserInteraction  animations:^{
-            [self.turnIndicator setAlpha:1.0];
-        } completion:nil];
     }
 }
 
@@ -547,12 +547,5 @@
     
     return [NSNumber numberWithFloat:distance];
 }
-
-
-
-
-
-
-
 
 @end
