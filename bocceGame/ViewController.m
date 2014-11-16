@@ -270,8 +270,6 @@
                 
                 self.startingLocation = gesture.view.center;
                 NSLog(@"Began %f %f", self.startingLocation.x, self.startingLocation.y);
-                
-                
 
                 break;
                 
@@ -331,12 +329,13 @@
         self.justMadeBlock = NO;
         self.notSuccessfullyThrown = NO;
     }
-    //all blocks have been thrown
+    //didn't go far enough
     else if (self.currentBlock.center.y > self.view.frame.size.height - 250)
     {
         self.currentBlock.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 85);
         
     }
+    //all blocks have been thrown
     else if (self.blocksMade == 9)
     {
         //end the game
@@ -385,8 +384,6 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     //middle of gameplay
-    //didn't go far enough
-    
     else
     {
         if ([self.currentBlock.backgroundColor isEqual:[UIColor blackColor]]) {
