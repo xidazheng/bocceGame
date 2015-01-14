@@ -302,6 +302,7 @@
                     
                     gesture.view.center = self.startingLocation;
                     self.notSuccessfullyThrown = YES;
+                    self.turnIndicator.text = @"Keep your finger behind the line";
                 }else if ([gesture velocityInView:self.view].y < 0){
                     
                     CGPoint velocity = [gesture velocityInView:self.view];
